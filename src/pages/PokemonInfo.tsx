@@ -30,7 +30,7 @@ export default function PokemonInfo() {
                 about={"SFASFASFASDSADMKLSAMCKLSAK"}
                 stats={[
                   { title: "Wxx", value: "6.9kg" },
-                  { title: "W", value: "6.9kg" },
+                  { title: "Ws", value: "6.9kg" },
                   { title: "W", value: "6.9kg" },
                   { title: "W", value: "6.9kg" },
                 ]}
