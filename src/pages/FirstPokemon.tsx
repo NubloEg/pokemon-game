@@ -3,26 +3,11 @@ import { Link } from "react-router-dom";
 import { Pokemon } from "../api/pokemonData";
 
 export default function FirstPokemon() {
-  const [randomPokemon, setRandomPokemon] = useState<Pokemon>({
-    name: "Hz",
-    id: 0,
-    sprites: {
-      front_default:
-        "https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png",
-      other: {
-        "official-artwork": {
-          front_default:
-            "https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png",
-          front_shiny:
-            "https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png",
-        },
-      },
-    },
-    weight: 32,
-  });
-  function getRandomArbitrary(min, max) {
+  const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
+    undefined
+  );
+  function getRandomArbitrary(min: number, max: number): number {
     let result = Math.random() * (max - min) + min;
-    console.log(result)
     return Math.floor(result);
   }
 
@@ -31,19 +16,42 @@ export default function FirstPokemon() {
       .then((response) => response.json())
       .then((data) => {
         setRandomPokemon(data);
-        console.log(data);
+      })
+      .catch((e) => {
+        alert("Покемон не найден");
       });
   };
 
   return (
     <div>
-      <Link to={"/pokemon"}>Pokemon</Link>
-      <button onClick={() => randomPokemonFun(1000)}>Random</button>
-      <div>{randomPokemon.name}</div>
-      <img
-        src={randomPokemon.sprites.other?.["official-artwork"].front_default}
-        alt=""
-      />
+      {randomPokemon && (
+        <div>
+          <div>{randomPokemon.name}</div>
+          {randomPokemon.id > -1 ? (
+            <Link to={"/pokemon/about"}>
+              <img
+                height={"450px"}
+                src={
+                  randomPokemon.sprites.other?.["official-artwork"]
+                    .front_default
+                }
+                alt=""
+              />
+            </Link>
+          ) : (
+            <img
+              height={"450px"}
+              src={
+                randomPokemon.sprites.other?.["official-artwork"].front_default
+              }
+              alt=""
+            />
+          )}
+        </div>
+      )}
+      <button hidden={!!randomPokemon} onClick={() => randomPokemonFun(1000)}>
+        Random pokemon
+      </button>
     </div>
   );
 }

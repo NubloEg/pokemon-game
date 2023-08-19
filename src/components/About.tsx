@@ -1,14 +1,12 @@
 import React from "react";
+import { Stat } from "../api/pokemonData";
 
 interface Props {
   about: string;
-  stats: Stats[];
+  stats: Stat[];
 }
 
-interface Stats {
-  title: string;
-  value: string | number;
-}
+
 export default function About({ about, stats }: Props) {
   return (
     <div>
@@ -16,8 +14,8 @@ export default function About({ about, stats }: Props) {
       <div className="mainStats">
         {stats.map((stats) => (
           <div>
-            <div className="title">{stats.title}</div>
-            <div className="value">{stats.value}</div>
+            <div className="title">{stats.stat.name}</div>
+            <div className="value">{stats.base_stat}</div>
           </div>
         ))}
       </div>
