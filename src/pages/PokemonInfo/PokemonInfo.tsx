@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import About from "../components/About.tsx";
-import Status from "../components/Status.tsx";
-import Evolutions from "../components/Evolutions.tsx";
+import About from "../../components/About.tsx";
+import Status from "../../components/Status.tsx";
+import Evolutions from "../../components/Evolutions.tsx";
 import { Link, Route, Routes } from "react-router-dom";
-import { Pokemon } from "../api/pokemonData.ts";
-import { Pokedex } from "../api/aboutPokemonData.ts";
+import { Pokemon } from "../../api/pokemonData.ts";
+import { Pokedex } from "../../api/aboutPokemonData.ts";
+import TypePokemon from "../../components/Type/Type.tsx";
+import s from "./PokemonInfo.module.css"
 
 export default function PokemonInfo() {
   const [nowPokemon, setNowPokemon] = useState<Pokemon | undefined>();
@@ -46,16 +48,15 @@ export default function PokemonInfo() {
         <span>Loading</span>
       ) : (
         <>
-          <Link to="/">Back</Link>
           <div className="card">
             <img
               alt="pok"
               src={nowPokemon.sprites.other["official-artwork"].front_default}
             />
             <h2>{nowPokemon.name}</h2>
-            <div className="types">
+            <div className={s.types}>
               {nowPokemon.types?.map((type) => (
-                <span key={type.type.name}>{type.type.name} </span>
+                <TypePokemon key={type.type.name} typeName={type.type.name} />
               ))}
             </div>
             <div className="Tabs">

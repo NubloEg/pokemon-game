@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pokemon } from "../api/pokemonData";
+import logo from "./randomBox.svg";
+import Button from "../components/Button/Button";
 
 export default function FirstPokemon() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
@@ -24,34 +26,27 @@ export default function FirstPokemon() {
 
   return (
     <div>
-      {randomPokemon && (
+      {randomPokemon ? (
         <div>
           <div>{randomPokemon.name}</div>
-          {randomPokemon.id > -1 ? (
-            <Link to={"/pokemon/about"}>
-              <img
-                height={"450px"}
-                src={
-                  randomPokemon.sprites.other?.["official-artwork"]
-                    .front_default
-                }
-                alt=""
-              />
-            </Link>
-          ) : (
+          <Link to={"/pokemon/about"}>
             <img
-              height={"450px"}
+              height={"180px"}
               src={
                 randomPokemon.sprites.other?.["official-artwork"].front_default
               }
               alt=""
             />
-          )}
+          </Link>
+        </div>
+      ) : (
+        <div>
+          <img height={"180px"} src={logo} alt="" />
         </div>
       )}
-      <button hidden={!!randomPokemon} onClick={() => randomPokemonFun(1000)}>
-        Random pokemon
-      </button>
+      <Button hidden={!!randomPokemon} onClick={() => randomPokemonFun(1000)}>
+        Click to random pokemon!!
+      </Button>
     </div>
   );
 }
