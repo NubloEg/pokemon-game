@@ -14,7 +14,7 @@ export interface Pokemon {
   past_types?: any[];
   species?: Species;
   sprites: Sprites;
-  stats?: Stat[];
+  stats: Stat[];
   types?: Type[];
   weight: number;
 }
@@ -105,7 +105,7 @@ export interface Sprites {
   front_female?: any;
   front_shiny?: string;
   front_shiny_female?: any;
-  other?: Other;
+  other: Other;
   versions?: Versions;
 }
 

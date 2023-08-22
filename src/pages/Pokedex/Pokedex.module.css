@@ -1,0 +1,7 @@
+.pokedexItems{
+    display: flex;
+    height: max-content;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
+}

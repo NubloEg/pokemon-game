@@ -1,0 +1,10 @@
+.default {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  border: 1px solid black !important;
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 4px 6px;
+}
