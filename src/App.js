@@ -1,6 +1,6 @@
 import "./App.css";
-import Menu from "./components/Menu.tsx";
-import FirstPokemon from "./pages/FirstPokemon.tsx";
+import Menu from "./components/Menu/Menu.tsx";
+import FirstPokemon from "./pages/FirstPokemon/FirstPokemon.tsx";
 import Pokedex from "./pages/Pokedex/Pokedex.tsx";
 import PokemonInfo from "./pages/PokemonInfo/PokemonInfo.tsx";
 import { Routes, Route } from "react-router-dom";

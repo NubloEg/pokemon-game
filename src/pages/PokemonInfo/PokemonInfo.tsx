@@ -35,8 +35,6 @@ export default function PokemonInfo() {
       });
   };
 
-  /*   */
-
   useEffect(() => {
     getInfoPokemon(887);
     getAboutPokemon(887);
