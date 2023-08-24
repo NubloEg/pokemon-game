@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { Pokemon } from "../../api/pokemonData";
 import logo from "../../assets/images/randomBox.svg";
 import Button from "../../components/Button/Button";
-import s from "./FirstPokemon.module.css"
+import s from "./FirstPokemon.module.css";
+import { useDispatch } from "react-redux";
+import { setCurrentPokemonId } from "../../redux/pokemonSlice";
 
 export default function FirstPokemon() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
@@ -14,11 +16,14 @@ export default function FirstPokemon() {
     return Math.floor(result);
   }
 
+  const dispatch = useDispatch();
+
   const randomPokemonFun = (id: number) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${getRandomArbitrary(1, id)}`)
       .then((response) => response.json())
       .then((data) => {
         setRandomPokemon(data);
+        dispatch(setCurrentPokemonId(data.id));
       })
       .catch((e) => {
         alert("Покемон не найден");
@@ -30,7 +35,7 @@ export default function FirstPokemon() {
       {randomPokemon ? (
         <div>
           <h1>Congratulations</h1>
-          <Link to={"/pokemon/about"}>
+          <Link to={`/pokemon/${randomPokemon.id}/about`}>
             <img
               height={"270px"}
               src={

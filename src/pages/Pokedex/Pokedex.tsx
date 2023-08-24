@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PokedexItem from "../../components/PokedexItem/PokedexItem";
 import s from "./Pokedex.module.css";
+import Select from "../../components/Select/Select";
 
 export default function Pokedex() {
   const [items, setItems] = useState([]);
@@ -20,8 +21,8 @@ export default function Pokedex() {
   return (
     <div>
       <input type="search" />
-      <button>types</button>
-      <button>rare</button>
+      <Select options={["fire","grass","flying"]}>type</Select>
+      <Select options={["common","rare","mythikal","legendary"]}>rare</Select>
       <div className={s.pokedexItems}>
         {items &&
           items?.map((item: { url: string }) => (

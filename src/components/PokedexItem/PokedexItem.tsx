@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Pokemon } from "../../api/pokemonData";
 import s from "./PokedexItem.module.css";
+import { useDispatch } from "react-redux";
+import { setCurrentPokemonId } from "../../redux/pokemonSlice";
 
 interface Props {
   url: string;
@@ -9,6 +11,7 @@ interface Props {
 
 export default function PokedexItem({ url }: Props) {
   const [pokemon, setPokemon] = useState<Pokemon | undefined>();
+  const dispatch = useDispatch();
 
   const randomPokemonFun = () => {
     fetch(url)
@@ -30,7 +33,11 @@ export default function PokedexItem({ url }: Props) {
   return (
     <>
       {pokemon ? (
-        <Link className={s.card} to={`/pokemon/${pokemon.id}`}>
+        <Link
+          onClick={() => dispatch(setCurrentPokemonId(pokemon.id))}
+          className={s.card}
+          to={`/pokemon/${pokemon.id}/about`}
+        >
           <h3>{pokemon.name}</h3>
           <div>
             <img
@@ -49,7 +56,6 @@ export default function PokedexItem({ url }: Props) {
         <div className={s.card}>
           <h2>Имя</h2>
           <div>
-            {" "}
             <img src="" alt="skeleton" />
           </div>
           <div className={s.types}>

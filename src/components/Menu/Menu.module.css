@@ -26,6 +26,14 @@
   background-color: #7d55c7;
 }
 
+.menu_icon:focus {
+  background-color: #7d55c7;
+}
+
 .menu_icon:hover .img {
+  color: white;
+}
+
+.menu_icon:focus .img {
   color: white;
 }
