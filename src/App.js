@@ -1,6 +1,7 @@
 import "./App.css";
 import Content from "./components/Content/Content.tsx";
-import Pokedex from "./pages/Pokedex/Pokedex.tsx";
+import FirstPokemon from "./pages/FirstPokemon/FirstPokemon.tsx";
+import Auth from "./pages/Auth/Auth.tsx";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/*" element={<Content />}></Route>
-        <Route path="/auth" element={<Pokedex />}></Route>
+        <Route path="/firstpokemon" element={<FirstPokemon />}></Route>
+        <Route path="/auth" element={<Auth />}></Route>
       </Routes>
     </div>
   );

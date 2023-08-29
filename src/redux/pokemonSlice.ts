@@ -22,6 +22,6 @@ export const pokemonSlice = createSlice({
 
 export const {setCurrentPokemonId } = pokemonSlice.actions;
 
-export const selectAutomationState = (state: RootState) => state.pokemonsSlice.currentPokemonId;
+export const selectCurrentPokemon = (state: RootState) => state.pokemonsSlice.currentPokemonId;
 
 export default pokemonSlice.reducer;

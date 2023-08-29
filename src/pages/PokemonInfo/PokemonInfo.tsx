@@ -8,13 +8,13 @@ import { Pokedex } from "../../api/aboutPokemonData.ts";
 import TypePokemon from "../../components/Type/Type.tsx";
 import s from "./PokemonInfo.module.css";
 import { useSelector } from "react-redux";
-import { selectAutomationState } from "../../redux/pokemonSlice.ts";
+import { selectCurrentPokemon } from "../../redux/pokemonSlice.ts";
 
 export default function PokemonInfo() {
   const [nowPokemon, setNowPokemon] = useState<Pokemon | undefined>();
   const [about, setAbout] = useState<Pokedex | undefined>(undefined);
 
-  const currentPokemonId = useSelector(selectAutomationState);
+  const currentPokemonId = useSelector(selectCurrentPokemon);
 
   const getInfoPokemon = (id: number | undefined) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
