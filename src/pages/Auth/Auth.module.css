@@ -1,0 +1,47 @@
+.authMain{
+    background-image: url(https://get.wallhere.com/photo/pokemon-Red-character-1659069.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;   
+    filter: blur(3px);
+}
+
+.form{
+    position: absolute;
+    top: 25%;
+    border: 1px solid white !important;
+    background-color: rgba(255, 255, 255, 0.194);
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width:25%;
+    min-width: 350px;
+    border-radius: 8px;
+    padding: 32px 14px;
+    height: 50%;
+}
+
+.title{
+    color: white;
+}
+
+.name{
+    text-align: left !important;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.input{
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    background-color: transparent !important;
+    border-bottom: 1px solid white;
+    caret-color: wheat !important;
+}
+
+.input:focus{
+    color: white !important;
+}

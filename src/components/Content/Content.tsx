@@ -14,13 +14,13 @@ export default function Content() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <>
+    <div className="flex">
       <Routes>
         <Route path="/pokemon/:id/*" element={<PokemonInfo />}></Route>
         <Route path="/pokemons" element={<Pokedex />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
       </Routes>
       <Menu />
-    </>
+    </div>
   );
 }

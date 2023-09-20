@@ -1,10 +1,16 @@
 .App {
   display: flex;
   align-items: center;
-  
   justify-content: space-between;
   text-align: center;
   background-color: white;
   flex-direction: column;
-  padding: 20px;
+  padding: 25px;
+  height: 100vh;
+}
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
