@@ -6,13 +6,17 @@ import { Link, Route, Routes } from "react-router-dom";
 import { Pokemon } from "../../api/pokemonData.ts";
 import { Pokedex } from "../../api/aboutPokemonData.ts";
 import TypePokemon from "../../components/Type/Type.tsx";
-import s from "./PokemonInfo.module.css"
+import s from "./PokemonInfo.module.css";
+import { useSelector } from "react-redux";
+import { selectCurrentPokemon } from "../../redux/pokemonSlice.ts";
 
 export default function PokemonInfo() {
   const [nowPokemon, setNowPokemon] = useState<Pokemon | undefined>();
   const [about, setAbout] = useState<Pokedex | undefined>(undefined);
 
-  const getInfoPokemon = (id: number) => {
+  const currentPokemonId = useSelector(selectCurrentPokemon);
+
+  const getInfoPokemon = (id: number | undefined) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((response) => response.json())
       .then((data) => {
@@ -23,8 +27,8 @@ export default function PokemonInfo() {
       });
   };
 
-  const getAboutPokemon = (id: number) => {
-    fetch(`https://pokeapi.co/api/v2/characteristic/${id}/`)
+  const getAboutPokemon = (id: number | undefined) => {
+    fetch(`https://pokeapi.co/api/v2/characteristic/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setAbout(data);
@@ -36,8 +40,9 @@ export default function PokemonInfo() {
   };
 
   useEffect(() => {
-    getInfoPokemon(887);
-    getAboutPokemon(887);
+    getInfoPokemon(currentPokemonId);
+    getAboutPokemon(currentPokemonId);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -58,9 +63,9 @@ export default function PokemonInfo() {
               ))}
             </div>
             <div className="Tabs">
-              <Link to={"/pokemon/about"}> About</Link>
-              <Link to={"/pokemon/status"}> Status</Link>
-              <Link to={"/pokemon/evolution"}> Evolutions</Link>
+              <Link to={`/pokemon/${nowPokemon.id}/about`}> About</Link>
+              <Link to={`/pokemon/${nowPokemon.id}/status`}> Status</Link>
+              <Link to={`/pokemon/${nowPokemon.id}/evolution`}> Evolutions</Link>
             </div>
             <Routes>
               <Route

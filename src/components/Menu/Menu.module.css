@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: space-around;
   box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.225);
+  align-self: center;
 }
 .menu_icon {
   display: flex;
@@ -26,6 +27,14 @@
   background-color: #7d55c7;
 }
 
+.menu_icon:focus {
+  background-color: #7d55c7;
+}
+
 .menu_icon:hover .img {
+  color: white;
+}
+
+.menu_icon:focus .img {
   color: white;
 }

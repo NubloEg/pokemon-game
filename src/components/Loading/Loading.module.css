@@ -1,0 +1,49 @@
+.conteiner {
+  z-index: 5;
+  position: absolute;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.image {
+  animation: spinner 1s linear infinite;
+}
+
+.stop {
+  transform: rotateZ(0deg) !important;
+}
+
+.close {
+  animation: close 1s linear forwards !important;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}

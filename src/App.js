@@ -1,19 +1,17 @@
 import "./App.css";
-import Menu from "./components/Menu/Menu.tsx";
+import Content from "./components/Content/Content.tsx";
 import FirstPokemon from "./pages/FirstPokemon/FirstPokemon.tsx";
-import Pokedex from "./pages/Pokedex/Pokedex.tsx";
-import PokemonInfo from "./pages/PokemonInfo/PokemonInfo.tsx";
+import Auth from "./pages/Auth/Auth.tsx";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/*" element={<FirstPokemon />}></Route>
-        <Route path="/pokemon/*" element={<PokemonInfo />}></Route>
-        <Route path="/pokemons" element={<Pokedex />}></Route>
+        <Route path="/*" element={<Content />}></Route>
+        <Route path="/firstpokemon" element={<FirstPokemon />}></Route>
+        <Route path="/auth" element={<Auth />}></Route>
       </Routes>
-      <Menu/>
     </div>
   );
 }

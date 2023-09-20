@@ -6,3 +6,9 @@
     height: 100%;
     gap: 80px;
 }
+
+.name{
+    color: black !important;
+    font-size: 36px;
+    margin-top: 14px;
+}
