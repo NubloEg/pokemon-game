@@ -6,11 +6,13 @@ import Button from "../../components/Button/Button";
 import s from "./FirstPokemon.module.css";
 import { useDispatch } from "react-redux";
 import { setCurrentPokemonId } from "../../redux/pokemonSlice";
+import Loading from "../../components/Loading/Loading";
 
 export default function FirstPokemon() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
     undefined
   );
+  const [loading, setLoading] = useState(false);
   function getRandomArbitrary(min: number, max: number): number {
     let result = Math.random() * (max - min) + min;
     return Math.floor(result);
@@ -19,11 +21,13 @@ export default function FirstPokemon() {
   const dispatch = useDispatch();
 
   const randomPokemonFun = (id: number) => {
+    setLoading(true);
     fetch(`https://pokeapi.co/api/v2/pokemon/${getRandomArbitrary(1, id)}`)
       .then((response) => response.json())
       .then((data) => {
         setRandomPokemon(data);
         dispatch(setCurrentPokemonId(data.id));
+        setLoading(false);
       })
       .catch((e) => {
         alert("Покемон не найден");
@@ -33,18 +37,23 @@ export default function FirstPokemon() {
   return (
     <div className={s.mainBox}>
       {randomPokemon ? (
-        <div>
-          <h1>Congratulations</h1>
-          <Link to={`/pokemon/${randomPokemon.id}/about`}>
-            <img
-              height={"270px"}
-              src={
-                randomPokemon.sprites.other?.["official-artwork"].front_default
-              }
-              alt=""
-            />
-          </Link>
-        </div>
+        <>
+          <Loading loading={loading} />
+          <div>
+            <h1>Congratulations</h1>
+            <Link to={`/pokemon/${randomPokemon.id}/about`}>
+              <img
+                height={"270px"}
+                src={
+                  randomPokemon.sprites.other?.["official-artwork"]
+                    .front_default
+                }
+                alt=""
+              />
+              <h2 className={s.name}>{randomPokemon.name}</h2>
+            </Link>
+          </div>
+        </>
       ) : (
         <div>
           <img height={"180px"} src={logo} alt="" />

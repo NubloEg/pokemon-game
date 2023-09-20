@@ -1,5 +1,5 @@
 .authMain{
-    background-image: url(https://get.wallhere.com/photo/pokemon-Red-character-1659069.jpg);
+    background-image: url("../../assets/authBackground.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;
