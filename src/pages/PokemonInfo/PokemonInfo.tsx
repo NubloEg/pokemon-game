@@ -9,6 +9,7 @@ import TypePokemon from "../../components/Type/Type.tsx";
 import s from "./PokemonInfo.module.css";
 import { useSelector } from "react-redux";
 import { selectCurrentPokemon } from "../../redux/pokemonSlice.ts";
+import Loading from "../../components/Loading/Loading.tsx";
 
 export default function PokemonInfo() {
   const [nowPokemon, setNowPokemon] = useState<Pokemon | undefined>();
@@ -48,7 +49,7 @@ export default function PokemonInfo() {
   return (
     <>
       {!nowPokemon ? (
-        <span>Loading</span>
+        <Loading loading={!nowPokemon}/>
       ) : (
         <>
           <div className="card">

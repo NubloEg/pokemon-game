@@ -55,8 +55,7 @@ export default function PokedexItem({ url }: Props) {
       ) : (
         <div className={s.card}>
           <h2>Имя</h2>
-          <div>
-            <img src="" alt="skeleton" />
+          <div className={s.skeleton}>
           </div>
           <div className={s.types}>
             <span>None</span>
