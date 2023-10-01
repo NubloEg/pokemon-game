@@ -27,7 +27,7 @@
   background-color: #7d55c7;
 }
 
-.menu_icon:focus {
+.active {
   background-color: #7d55c7;
 }
 
@@ -35,6 +35,6 @@
   color: white;
 }
 
-.menu_icon:focus .img {
+.active .img {
   color: white;
 }

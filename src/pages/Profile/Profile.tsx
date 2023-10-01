@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { authState } from "../../redux/authSlice";
+import { profileState } from "../../redux/profileSlice";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import s from "./Profile.module.css"
 
 export default function Profile() {
-  const [profile] = useState<authState>(
+  const [profile] = useState<profileState>(
     JSON.parse(sessionStorage.getItem("profile") ?? "")
   );
 

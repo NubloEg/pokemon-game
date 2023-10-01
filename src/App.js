@@ -12,6 +12,10 @@ function App() {
         <Route path="/firstpokemon" element={<FirstPokemon />}></Route>
         <Route path="/auth" element={<Auth />}></Route>
       </Routes>
+      <div className="change_theme">
+        <button>Light</button>
+        <button>Dark</button>
+      </div>
     </div>
   );
 }

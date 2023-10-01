@@ -3,6 +3,7 @@ import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import s from "./Auth.module.css";
 import Loading from "../../components/Loading/Loading";
+import sql from "../../sql.json"
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -43,8 +44,11 @@ export default function Auth() {
 
         <Button
           onClick={() => {
-            sessionStorage.setItem("profile", JSON.stringify(profile));
-            navigate("/firstpokemon");
+            if(sql.hasOwnProperty(profile.login)){
+              sessionStorage.setItem("profile", JSON.stringify(profile));
+              navigate("/firstpokemon");
+            }
+           
           }}
         >
           Login

@@ -48,7 +48,7 @@ export default function PokedexItem({ url }: Props) {
           </div>
           <div className={s.types}>
             {pokemon.types?.map((type) => (
-              <span>{type.type.name}</span>
+              <span key={pokemon.id}>{type.type.name}</span>
             ))}
           </div>
         </Link>

@@ -10,8 +10,8 @@ export default function Select(props: Props) {
     <span>
       {props.options && (
         <select className={s.select_css} name="pets" id="pet-select">
-          {props.options.map((option) => (
-            <option value={option}>{option}</option>
+          {props.options.map((option,ind) => (
+            <option key={ind} value={option}>{option}</option>
           ))}
         </select>
       )}

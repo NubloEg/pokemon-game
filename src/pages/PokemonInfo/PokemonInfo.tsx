@@ -52,7 +52,7 @@ export default function PokemonInfo() {
         <Loading loading={!nowPokemon}/>
       ) : (
         <>
-          <div className="card">
+          <div className={s.card}>
             <img
               alt="pok"
               src={nowPokemon.sprites.other["official-artwork"].front_default}
