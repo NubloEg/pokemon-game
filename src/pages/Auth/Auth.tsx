@@ -18,6 +18,7 @@ export default function Auth() {
 
   return (
     <>
+      <input type="text" style={{backgroundColor:"black",color:"white",padding:"15px"}}/>
       <div className={s.authMain}></div>
       <form className={s.form}>
         <h1 className={s.title}>Welcome</h1>
