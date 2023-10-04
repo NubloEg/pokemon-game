@@ -26,6 +26,7 @@ export default function FirstPokemon() {
       .then((response) => response.json())
       .then((data) => {
         setRandomPokemon(data);
+        console.log(data);
         dispatch(setCurrentPokemonId(data.id));
         setLoading(false);
       })
@@ -40,17 +41,17 @@ export default function FirstPokemon() {
         <>
           <Loading loading={loading} />
           <div>
-            <h1>Congratulations</h1>
+            <h1 style={{fontSize:"80px"}}>Congratulations</h1>
             <Link to={`/pokemon/${randomPokemon.id}/about`}>
               <img
-                height={"270px"}
+                height={"470px"}
                 src={
                   randomPokemon.sprites.other?.["official-artwork"]
                     .front_default
                 }
                 alt=""
               />
-              <h2 className={s.name}>{randomPokemon.name}</h2>
+              <h2 style={{fontSize:"80px"}} className={s.name}>{randomPokemon.name}</h2>
             </Link>
           </div>
         </>
