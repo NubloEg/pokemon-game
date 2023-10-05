@@ -54,7 +54,7 @@ export default function Auth() {
           Login
         </Button>
       </form>
-      <Loading loading={loading}/>
+      {/* <Loading loading={loading}/> */}
     </>
   );
 }
