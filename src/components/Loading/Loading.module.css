@@ -40,10 +40,12 @@
 
   99% {
     opacity: 0;
+    scale: 1;
   }
 
   100% {
     opacity: 0;
+    scale: 0;
     display: none;
   }
 }
