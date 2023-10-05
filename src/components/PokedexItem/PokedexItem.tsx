@@ -12,6 +12,7 @@ interface Props {
 export default function PokedexItem({ url }: Props) {
   const [pokemon, setPokemon] = useState<Pokemon | undefined>();
   const dispatch = useDispatch();
+  console.log(url)
 
   const randomPokemonFun = () => {
     fetch(url)

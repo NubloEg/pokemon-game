@@ -5,7 +5,7 @@ import logo from "../../assets/images/randomBox.svg";
 import Button from "../../components/Button/Button";
 import s from "./FirstPokemon.module.css";
 import { useDispatch } from "react-redux";
-import { setCurrentPokemonId } from "../../redux/pokemonSlice";
+import { addPokemon, setCurrentPokemonId } from "../../redux/pokemonSlice";
 import Loading from "../../components/Loading/Loading";
 
 export default function FirstPokemon() {
@@ -28,6 +28,7 @@ export default function FirstPokemon() {
         setRandomPokemon(data);
         console.log(data);
         dispatch(setCurrentPokemonId(data.id));
+        dispatch(addPokemon(data));
         setLoading(false);
       })
       .catch((e) => {
