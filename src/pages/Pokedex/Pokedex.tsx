@@ -21,31 +21,34 @@ export default function Pokedex() {
   }, [page]);
 
   return (
-    <div>
-      <input type="search" />
-      <Select options={["fire", "grass", "flying"]}>type</Select>
-      <Select options={["common", "rare", "mythikal", "legendary"]}>
-        rare
-      </Select>
-      <div>
-        <Button
-          onClick={() => {
-            if (page > 0) {
-              setPage(page - 1);
-            }
-          }}
-        >
-          Назад
-        </Button>
-        <h3>{page+1}</h3>
-        <Button onClick={() => setPage(page + 1)}>Вперед</Button>
+    <>
+      <div className={s.topMenu}>
+        <div className={s.searchMenu}>
+          <input type="search" />
+          <Select options={["fire", "grass", "flying"]}>fire</Select>
+        </div>
+        <div className={s.changePage}>
+          <Button
+            onClick={() => {
+              if (page > 0) {
+                setPage(page - 1);
+              }
+            }}
+          >
+            Назад
+          </Button>
+          <h3>{page + 1}</h3>
+          <Button onClick={() => setPage(page + 1)}>Вперед</Button>
+        </div>
       </div>
-      <div className={s.pokedexItems}>
-        {items &&
-          items?.map((item: { url: string }) => (
-            <PokedexItem url={item.url} key={item.url} />
-          ))}
+      <div style={{ height: "100%", overflow: "auto" }}>
+        <div className={s.pokedexItems}>
+          {items &&
+            items?.map((item: { url: string }) => (
+              <PokedexItem url={item.url} key={item.url} />
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

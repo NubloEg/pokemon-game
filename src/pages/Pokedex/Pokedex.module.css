@@ -5,3 +5,18 @@
     flex-wrap: wrap;
     gap: 15px;
 }
+
+.topMenu{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.searchMenu{
+    display: flex;
+}
+
+.changePage{
+    display: flex;
+    align-items: center;
+}

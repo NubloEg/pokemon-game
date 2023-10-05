@@ -2,7 +2,20 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.Profile_container{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
     gap: 50px;
+    width: 40%;
+}
+
+h1{
+    font-size: 50px;
 }
 
 
@@ -10,13 +23,18 @@
     height: 160px;
     width: 160px;
     border-radius: 50%;
+    object-fit: cover;
     align-self: center;
 }
 
-.login,.password{
+.login{
     font-size: 40px;
+}
+
+.settings{
     display: flex;
-    justify-content: center;
-    gap: 40px;
-    
+    align-items: center;
+    justify-content: space-between;
+    font-size: 32px;
+
 }
