@@ -31,11 +31,16 @@ export default function PokedexItem({ url }: Props) {
     []
   );
 
+  const selectPokemon=(id:number)=>{
+    dispatch(setCurrentPokemonId(id))
+    sessionStorage.setItem("currentPokemon",id.toString());
+  }
+
   return (
     <>
       {pokemon ? (
         <Link
-          onClick={() => dispatch(setCurrentPokemonId(pokemon.id))}
+          onClick={() => selectPokemon(pokemon.id)}
           className={s.card}
           to={`/pokemon/${pokemon.id}/about`}
         >

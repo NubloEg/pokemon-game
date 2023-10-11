@@ -8,8 +8,8 @@ import sql from "../../sql.json"
 export default function Auth() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<{ login: string; password: string }>({
-    login: "egor",
-    password: "123",
+    login: "",
+    password: "",
   });
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Auth() {
           <div className={s.name__title}>Name</div>
           <input
             className={s.input}
-            value={'egor'}
+            value={profile.login}
             onChange={(e) =>
               setProfile({ login: e.target.value, password: profile.password })
             }
@@ -35,7 +35,7 @@ export default function Auth() {
           <div className={s.name__title}>Password</div>
           <input
             className={s.input}
-            value={"123"}
+            value={profile.password}
             onChange={(e) =>
               setProfile({ login: profile.login, password: e.target.value })
             }

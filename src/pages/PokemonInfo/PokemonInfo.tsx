@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import About from "../../components/About.tsx";
-import Status from "../../components/Status.tsx";
-import Evolutions from "../../components/Evolutions.tsx";
+import About from "./State/About/About.tsx";
+import Status from "./State/Status/Status.tsx";
+import Evolutions from "./State/Evolutions.tsx";
 import { Link, Route, Routes } from "react-router-dom";
 import { Pokemon } from "../../api/pokemonData.ts";
 import { Pokedex } from "../../api/aboutPokemonData.ts";
@@ -15,7 +15,12 @@ export default function PokemonInfo() {
   const [nowPokemon, setNowPokemon] = useState<Pokemon | undefined>();
   const [about, setAbout] = useState<Pokedex | undefined>(undefined);
 
-  const currentPokemonId = useSelector(selectCurrentPokemon);
+  let currentPokemonId = useSelector(selectCurrentPokemon);
+
+  const ssesionId = sessionStorage.getItem("currentPokemon");
+  if (ssesionId !== null) {
+    currentPokemonId = parseInt(ssesionId, 10);
+  }
 
   const getInfoPokemon = (id: number | undefined) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -49,11 +54,12 @@ export default function PokemonInfo() {
   return (
     <>
       {!nowPokemon ? (
-        <Loading loading={!nowPokemon}/>
+        <Loading loading={!nowPokemon} />
       ) : (
         <>
           <div className={s.card}>
             <img
+              className={s.pokemonImg}
               alt="pok"
               src={nowPokemon.sprites.other["official-artwork"].front_default}
             />
@@ -63,28 +69,30 @@ export default function PokemonInfo() {
                 <TypePokemon key={type.type.name} typeName={type.type.name} />
               ))}
             </div>
-            <div className="Tabs">
-              <Link to={`/pokemon/${nowPokemon.id}/about`}> About</Link>
-              <Link to={`/pokemon/${nowPokemon.id}/status`}> Status</Link>
-              <Link to={`/pokemon/${nowPokemon.id}/evolution`}> Evolutions</Link>
+            <div className={s.Tabs}>
+              <Link className={s.tab} to={`/pokemon/${nowPokemon.id}/about`}> About</Link>
+              <Link className={s.tab} to={`/pokemon/${nowPokemon.id}/status`}> Status</Link>
+              <Link className={s.tab} to={`/pokemon/${nowPokemon.id}/evolution`}>Evolutions</Link>
             </div>
-            <Routes>
-              <Route
-                path="/about"
-                element={
-                  <About
-                    about={
-                      about === undefined
-                        ? "none"
-                        : about.descriptions[7].description
-                    }
-                    stats={nowPokemon.stats}
-                  />
-                }
-              />
-              <Route path="/status" element={<Status />} />
-              <Route path="/evolution" element={<Evolutions />} />
-            </Routes>
+            <div className={s.content}>
+              <Routes>
+                <Route
+                  path="/about"
+                  element={
+                    <About
+                      about={
+                        about === undefined
+                          ? "none"
+                          : about.descriptions[7].description
+                      }
+                      stats={nowPokemon.stats}
+                    />
+                  }
+                />
+                <Route path="/status" element={<Status />} />
+                <Route path="/evolution" element={<Evolutions />} />
+              </Routes>
+            </div>
           </div>
         </>
       )}
