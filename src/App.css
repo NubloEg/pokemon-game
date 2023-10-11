@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  background-color: rgb(249, 255, 181);
+  background-color:  var(body);
   flex-direction: column;
   padding: 50px 25px;
   height: 100vh;
@@ -17,4 +17,15 @@
   height: 100%;
 }
 
+.money{
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  font-weight: 700;
+}
 
+.itemShop{
+  cursor: pointer;
+}

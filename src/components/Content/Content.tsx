@@ -18,6 +18,7 @@ export default function Content() {
 
   return (
     <div className="flex">
+      <div className="money">0</div>
       <Routes>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/pokemon/:id/*" element={<PokemonInfo />}></Route>

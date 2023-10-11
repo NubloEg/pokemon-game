@@ -1,0 +1,10 @@
+.about{
+    color: rgba(0, 0, 0, 0.711);
+    margin-bottom: 35px;
+}
+
+.mainStats{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

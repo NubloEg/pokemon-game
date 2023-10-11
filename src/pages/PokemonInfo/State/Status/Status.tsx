@@ -1,12 +1,13 @@
 import React from "react";
+import s from "./Status.module.css"
 
 export default function Status() {
   return (
     <div>
-      <div className="stats">
-        <div className="items">
-          <div className="title">HP</div>
-          <div className="value">35</div>
+      <div className={s.stats}>
+        <div className={s.items}>
+          <div className={s.title}>HP</div>
+          <div className={s.value}>35</div>
           <div className="progressBar">
             <div className="progressBarProc"></div>
           </div>
