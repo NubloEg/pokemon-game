@@ -3,7 +3,6 @@ import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import s from "./Auth.module.css";
 import Loading from "../../components/Loading/Loading";
-import sql from "../../sql.json"
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -15,6 +14,19 @@ export default function Auth() {
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);
   });
+
+  const signUp = () => {
+    fetch(`https://localhost:5555/auth`)
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data);
+        navigate('/firstpokemon')
+      })
+      .catch((e) => {
+        console.log(e)
+        alert("Пользователь не найден");
+      });
+  };
 
   return (
     <>
@@ -42,20 +54,9 @@ export default function Auth() {
           />
         </div>
 
-        <Button
-          onClick={() => {
-            if(sql.hasOwnProperty(profile.login)){
-              sessionStorage.setItem("profile", JSON.stringify(profile));
-              navigate("/firstpokemon");
-            }
-           
-          }}
-        >
-          Login
-        </Button>
+        <Button onClick={() => signUp()}>Login</Button>
       </form>
-      <Loading loading={loading}/>
+      <Loading loading={loading} />
     </>
   );
 }
-
