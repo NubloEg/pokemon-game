@@ -1,3 +1,11 @@
 .shop{
     height: 100%;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.itemShop{
+    height: max-content;
+    cursor: pointer;
 }
