@@ -16,14 +16,13 @@ export default function Auth() {
   });
 
   const signUp = () => {
-    fetch(`https://localhost:5555/auth`)
+    fetch(`http://localhost:5000/auth/${profile.login}`)
       .then((response) => response.json())
       .then((data) => {
-        alert(data);
+        sessionStorage.setItem('profile', JSON.stringify(data[0]))
         navigate('/firstpokemon')
       })
       .catch((e) => {
-        console.log(e)
         alert("Пользователь не найден");
       });
   };
@@ -31,31 +30,58 @@ export default function Auth() {
   return (
     <>
       <div className={s.authMain}></div>
-      <form className={s.form}>
+      <div>Register</div>
+      <div className={s.form}>
         <h1 className={s.title}>Welcome</h1>
-        <div className={s.name}>
-          <div className={s.name__title}>Name</div>
-          <input
-            className={s.input}
-            value={profile.login}
-            onChange={(e) =>
-              setProfile({ login: e.target.value, password: profile.password })
-            }
-          />
-        </div>
-        <div className={s.name}>
-          <div className={s.name__title}>Password</div>
-          <input
-            className={s.input}
-            value={profile.password}
-            onChange={(e) =>
-              setProfile({ login: profile.login, password: e.target.value })
-            }
-          />
+        <div className={s.relative}>
+          <div className={s.auth}>
+            <div className={s.name}>
+              <div className={s.name__title}>Name</div>
+              <input
+                className={s.input}
+                value={profile.login}
+                onChange={(e) =>
+                  setProfile({ login: e.target.value, password: profile.password })
+                }
+              />
+            </div>
+            <div className={s.name}>
+              <div className={s.name__title}>Password</div>
+              <input
+                className={s.input}
+                value={profile.password}
+                onChange={(e) =>
+                  setProfile({ login: profile.login, password: e.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className={s.register}>
+            <div className={s.name}>
+              <div className={s.name__title}>Name</div>
+              <input
+                className={s.input}
+                value={profile.login}
+                onChange={(e) =>
+                  setProfile({ login: e.target.value, password: profile.password })
+                }
+              />
+            </div>
+            <div className={s.name}>
+              <div className={s.name__title}>Password</div>
+              <input
+                className={s.input}
+                value={profile.password}
+                onChange={(e) =>
+                  setProfile({ login: profile.login, password: e.target.value })
+                }
+              />
+            </div>
+          </div>
         </div>
 
-        <Button onClick={() => signUp()}>Login</Button>
-      </form>
+        <Button onClick={() => signUp()} >Login</Button>
+      </div>
       <Loading loading={loading} />
     </>
   );

@@ -19,7 +19,9 @@
     min-width: 350px;
     border-radius: 8px;
     padding: 32px 14px;
-    height: 50%;
+    height: 70%;
+    overflow: hidden;
+    max-height: 420px;
 }
 
 .title{
@@ -40,8 +42,26 @@
     background-color: transparent !important;
     border-bottom: 1px solid white;
     caret-color: wheat !important;
+    font-size: 18px;
 }
 
 .input:focus{
     color: white !important;
+}
+
+
+.relative{
+    position: relative;
+}
+
+.auth{
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.register{
+    top: 0;
+    position: absolute;
+    right: -100%;
 }
