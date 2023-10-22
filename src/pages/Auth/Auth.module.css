@@ -19,7 +19,9 @@
     min-width: 350px;
     border-radius: 8px;
     padding: 32px 14px;
-    height: 50%;
+    height: 70%;
+    overflow: hidden;
+    max-height: 420px;
 }
 
 .title{
@@ -40,8 +42,57 @@
     background-color: transparent !important;
     border-bottom: 1px solid white;
     caret-color: wheat !important;
+    font-size: 18px;
 }
 
 .input:focus{
     color: white !important;
+}
+
+
+.relative{
+    position: relative;
+}
+
+.switch{
+    position: absolute;
+    bottom:-30px;
+    right: 0%;
+    cursor: pointer;
+    user-select: none;
+    transition: all .5s;
+    color: white;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.change{
+    right: 88%;
+}
+
+.auth{
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    transition: all 0.3s;
+}
+
+.close{
+    opacity: 0;
+    scale: 0;
+}
+
+.register{
+    top: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    width: 100%;
+    left: 120%;
+    transition: all .5s;
+}
+
+.open{
+    left: 0%;
 }
