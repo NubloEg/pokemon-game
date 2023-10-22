@@ -1,13 +1,23 @@
 .card {
-  height: 100%;
+  height: calc(100% - 90px);
+
+}
+
+.img{
+  position: relative;
+  border-radius:10%;
 }
 
 .pokemonImg {
-  max-height: 300px;
+  max-height: 250px;
 }
 
-h2 {
+
+
+.card h2 {
   padding-bottom: 15px;
+  color:black;
+  font-size: 32px;
 }
 
 .types {
@@ -37,15 +47,19 @@ h2 {
   width: 100%;
   left: 0;
   bottom: -3px;
-  background-color: rgb(25, 191, 50);
+  background-color: rgba(0, 0, 0, 0.60);
   transition: all 0.3s;
 }
 
 .tab:hover::after {
-  background-color: rgb(15, 121, 31);
+  background-color: #48D0B0;
+}
+
+.tabActive::after{
+  background-color: #48D0B0;
 }
 
 .content {
   overflow: auto;
-  height: 30%;
+  height: 50%;
 }

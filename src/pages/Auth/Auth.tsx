@@ -34,7 +34,6 @@ export default function Auth() {
       })
       .then((data) => {
         if(data.hasOwnProperty('error')){
-          console.log(data.message[0])
          throw new Error(data.message[0])
         }
         sessionStorage.setItem('profile', JSON.stringify(data))
@@ -60,7 +59,6 @@ export default function Auth() {
       .then((response) => response.json())
       .then((data) => {
         if(data.hasOwnProperty('error')){
-          console.log(data.message[0])
          throw new Error(data.message[0])
         }
         sessionStorage.setItem('profile', JSON.stringify(data))

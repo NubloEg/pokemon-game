@@ -3,3 +3,9 @@
     width: 120px;
     background-color: rgb(200, 200, 200) !important;
 }
+
+.types{
+    display: flex;
+    justify-content: space-around;
+    gap: 4px;
+}

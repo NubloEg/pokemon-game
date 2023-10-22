@@ -21,7 +21,7 @@ export default function Pokedex() {
   }, [page]);
 
   return (
-    <>
+    <div className={s.containerPokedex}>
       <div className={s.topMenu}>
         <div className={s.searchMenu}>
           <input type="search" />
@@ -41,7 +41,7 @@ export default function Pokedex() {
           <Button onClick={() => setPage(page + 1)}>Вперед</Button>
         </div>
       </div>
-      <div style={{ height: "100%", overflow: "auto" }}>
+      <div style={{ height: "90%", overflow: "auto" }}>
         <div className={s.pokedexItems}>
           {items &&
             items?.map((item: { url: string }) => (
@@ -49,6 +49,6 @@ export default function Pokedex() {
             ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

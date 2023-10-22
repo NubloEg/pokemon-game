@@ -1,4 +1,5 @@
 .menu {
+  z-index: 5000;
   background-color: #f0f0f0;
   border-radius: 50px 50px 0px 0px;
   padding: 20px 0px;

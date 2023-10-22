@@ -15,6 +15,7 @@ import steel from "./steel.png"
 import rock from "./stone.png"
 import water from "./water.png"
 import psychic from "./water.png"
+import normal from "./normal.png"
 
 // eslint-disable-next-line
-export default { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, poison, steel, rock, water, psychic }
+export default { normal,bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, poison, steel, rock, water, psychic }

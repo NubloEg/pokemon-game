@@ -26,7 +26,6 @@ export default function FirstPokemon() {
       .then((response) => response.json())
       .then((data) => {
         setRandomPokemon(data);
-        console.log(data);
         dispatch(setCurrentPokemonId(data.id));
         dispatch(addPokemon(data));
         setLoading(false);

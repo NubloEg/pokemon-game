@@ -1,3 +1,7 @@
+.containerPokedex{
+    height: calc(100% - 90px);
+}
+
 .pokedexItems{
     display: flex;
     height: max-content;

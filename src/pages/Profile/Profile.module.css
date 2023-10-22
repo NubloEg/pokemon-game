@@ -1,5 +1,6 @@
 .Profile{
-    height: 100%;
+    height: calc(100% - 90px);
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -17,16 +17,18 @@ export default function Content() {
   }, []);
 
   return (
-    <div className="flex">
+    <>
       <div className="money">0</div>
-      <Routes>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/pokemon/:id/*" element={<PokemonInfo />}></Route>
-        <Route path="/pokemons" element={<Pokedex />}></Route>
-        <Route path="/shop" element={<Shop />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-      </Routes>
-      <Menu />
-    </div>
+      <div className="flex">
+        <Routes>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/pokemon/:id/*" element={<PokemonInfo />}></Route>
+          <Route path="/pokemons" element={<Pokedex />}></Route>
+          <Route path="/shop" element={<Shop />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+        </Routes>
+        <Menu />
+      </div>
+    </>
   );
 }

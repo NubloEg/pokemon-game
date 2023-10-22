@@ -4,6 +4,7 @@ import { Pokemon } from "../../api/pokemonData";
 import s from "./PokedexItem.module.css";
 import { useDispatch } from "react-redux";
 import { setCurrentPokemonId } from "../../redux/pokemonSlice";
+import ContentLoader from "react-content-loader";
 
 interface Props {
   url: string;
@@ -12,7 +13,6 @@ interface Props {
 export default function PokedexItem({ url }: Props) {
   const [pokemon, setPokemon] = useState<Pokemon | undefined>();
   const dispatch = useDispatch();
-  console.log(url)
 
   const randomPokemonFun = () => {
     fetch(url)
@@ -59,14 +59,20 @@ export default function PokedexItem({ url }: Props) {
           </div>
         </Link>
       ) : (
-        <div className={s.card}>
-          <h2>Имя</h2>
-          <div className={s.skeleton}>
-          </div>
-          <div className={s.types}>
-            <span>None</span>
-          </div>
-        </div>
+        <ContentLoader 
+        speed={2}
+        width={120}
+        height={160}
+        viewBox="0 0 120 160"
+        backgroundColor="#8c8c8c"
+        foregroundColor="#ecebeb"
+      >
+        <rect x="0" y="20" rx="100" ry="100" width="120" height="120" /> 
+        <rect x="0" y="5" rx="0" ry="0" width="120" height="10" /> 
+        <rect x="45" y="150" rx="0" ry="0" width="30" height="13" /> 
+        <rect x="0" y="150" rx="0" ry="0" width="30" height="13" /> 
+        <rect x="90" y="150" rx="0" ry="0" width="30" height="13" />
+      </ContentLoader>
       )}
     </>
   );
