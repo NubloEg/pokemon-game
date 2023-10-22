@@ -58,6 +58,7 @@
 
 @keyframes swp_revers {
   0% {
+    background-image: url("./full-moon.png");
     transform: translateX(48px);
   }
   50% {

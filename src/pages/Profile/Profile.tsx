@@ -20,7 +20,7 @@ export default function Profile() {
           src="https://lapkus.ru/wp-content/uploads/2023/05/ocr-2023-05-24t104452.248.jpg"
           alt="ava"
         />
-        <div className={s.login}>{`${profile.login} ${profile.password}`}</div>
+        <div className={s.login}>{`${profile.email} ${profile.password}`}</div>
       </div>
 
       <div className={s.settings}>

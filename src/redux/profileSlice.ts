@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 export interface profileState {
-  login?: string;
+  email?: string;
   password?: string;
   theme:string;
   currentPage?:string;
@@ -16,8 +16,8 @@ export const profileSlice=createSlice({
     name:"profileSlice",
     initialState,
     reducers: {
-        setProfile: (state, action: PayloadAction<{login:string,password:string}>) => {
-         state.login=action.payload.login;
+        setProfile: (state, action: PayloadAction<{email:string,password:string}>) => {
+         state.email=action.payload.email;
          state.password=action.payload.password;
         },
         setTheme:(state,action:PayloadAction<string>)=>{
