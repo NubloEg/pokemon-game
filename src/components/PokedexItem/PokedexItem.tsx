@@ -18,10 +18,12 @@ export default function PokedexItem({ url }: Props) {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        
         setPokemon(data);
+       
       })
       .catch((e) => {
-        alert("Покемон не найден");
+       /*  alert("Покемон не найден"); */
       });
   };
 
@@ -53,13 +55,14 @@ export default function PokedexItem({ url }: Props) {
             />
           </div>
           <div className={s.types}>
-            {pokemon.types?.map((type) => (
-              <span key={pokemon.id}>{type.type.name}</span>
+            {pokemon.types?.map((type,i) => (
+              <span key={i}>{type.type.name}</span>
             ))}
           </div>
         </Link>
       ) : (
-        <ContentLoader 
+        <ContentLoader
+        className={s.skeleton}
         speed={2}
         width={120}
         height={160}

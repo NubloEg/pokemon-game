@@ -7,7 +7,10 @@
       "default",
       {
         "ignore": [
-          "-ms-text-size-adjust"
+          "-ms-text-size-adjust",
+          "scale",
+          "scrollbar-color",
+          "scrollbar-width"
         ]
       }
     ],
@@ -19,5 +22,15 @@
       }
     ],
     "no-inline-styles": "off"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not and_chr <= 117",
+    "not chrome <= 117",
+    "not edge <= 117",
+    "not ios_saf <= 12.5",
+    "not opera <= 102",
+    "not samsung <= 22"
+  ]
 }
