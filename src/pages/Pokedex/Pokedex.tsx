@@ -8,10 +8,10 @@ export default function Pokedex() {
   const [items, setItems] = useState<Array<{ url: string }>>([]);
   const [page, setPage] = useState(0);
   const [searchValue, setSearchValue] = useState<string>("");
-  const [searchType, setSearchType] = useState<string>("");
+  const [searchType, setSearchType] = useState<string>("All");
 
   useEffect(() => {
-    if (searchType === "") {
+    if (searchType === "All") {
       fetch(
         `https://pokeapi.co/api/v2/pokemon/${searchValue}?offset=${
           36 * page
@@ -26,10 +26,11 @@ export default function Pokedex() {
         });
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, searchValue]);
+  }, [page, searchValue,searchType]);
 
   useEffect(() => {
-    if (searchType !== "") {
+    if (searchType !== "All") {
+      setSearchType(searchType.toLowerCase())
       fetch(
         `https://pokeapi.co/api/v2/type/${searchType}?offset=${
           36 * page
@@ -65,7 +66,7 @@ export default function Pokedex() {
           />
           <Select
             setSearchType={setSearchType}
-            options={["fire", "grass", "flying"]}
+            options={["All","Fire", "Grass", "Flying"]}
           >
             fire
           </Select>

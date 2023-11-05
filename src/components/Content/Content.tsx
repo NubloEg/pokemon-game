@@ -6,6 +6,7 @@ import Menu from "../Menu/Menu";
 import Profile from "../../pages/Profile/Profile";
 import Home from "../../pages/Home/Home";
 import Shop from "../../pages/Shop/Shop";
+import Money from "../Money/Money";
 
 export default function Content() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function Content() {
 
   return (
     <>
-      <div className="money">0</div>
+    <Money/>
       <div className="flex">
         <Routes>
           <Route path="/home" element={<Home />}></Route>

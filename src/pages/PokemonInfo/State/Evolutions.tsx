@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function Evolutions() {
+export default function Evolutions(evolution: {
+  first_evolv: string;
+  seconde_evolve: string;
+  three_evolve: string;
+}) {
+
   return (
     <div>
       <div className="evolution">

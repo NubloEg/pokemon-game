@@ -1,14 +1,22 @@
-.mainBox{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    gap: 80px;
+.mainBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 80px;
 }
 
-.name{
-    color: black !important;
-    font-size: 36px;
-    margin-top: 14px;
+.name {
+  color: black !important;
+  font-size: 36px;
+  margin-top: 14px;
+}
+
+.imgPokemon {
+  height: 80%;
+}
+
+@media (max-width: 600px) {
+ 
 }

@@ -6,7 +6,7 @@ import Loading from "../../components/Loading/Loading";
 
 export default function Auth() {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true)
+  const [isLogin, setIsLogin] = useState(true);
   const [profile, setProfile] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
@@ -20,54 +20,63 @@ export default function Auth() {
     fetch(`http://localhost:4444/api/auth/login`, {
       method: "post",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: profile.email,
-        password: profile.password
-      })
+        password: profile.password,
+      }),
     })
-      .then((response) =>{
-        if(!response.ok) throw new Error(response.statusText)
-        return response.json()
+      .then((response) => {
+        if (!response.ok) throw new Error(response.statusText);
+        return response.json();
       })
       .then((data) => {
-        if(data.hasOwnProperty('error')){
-         throw new Error(data.message[0])
+        if (data.hasOwnProperty("error")) {
+          throw new Error(data.message[0]);
         }
-        sessionStorage.setItem('profile', JSON.stringify(data))
-        navigate('/firstpokemon')
+        sessionStorage.setItem("profile", JSON.stringify(data));
+        navigate("/firstpokemon");
+      })
+      .catch((e) => {
+        alert(e);
+        navigate("/firstpokemon");
+
+      });
+  };
+
+  const register = () => {
+    fetch(`https://pokemon-api-theta-inky.vercel.app/api/user`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: profile.email,
+        password: profile.password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.hasOwnProperty("error")) {
+          throw new Error(data.message[0]);
+        }
+        sessionStorage.setItem("profile", JSON.stringify(data));
+        navigate("/firstpokemon");
       })
       .catch((e) => {
         alert(e);
       });
   };
 
-  const register = () => {
-    fetch(`http://localhost:4444/api/user`, {
-      method: "post",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: profile.email,
-        password: profile.password
-      })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if(data.hasOwnProperty('error')){
-         throw new Error(data.message[0])
-        }
-        sessionStorage.setItem('profile', JSON.stringify(data))
-        navigate('/firstpokemon')
-        
-      })
-      .catch((e) => {
-        alert(e);
-      });
+  const onSumbit = () => {
+    if (isLogin) {
+      signUp();
+    } else {
+      register();
+    }
   };
 
   return (
@@ -76,7 +85,12 @@ export default function Auth() {
       <div className={s.form}>
         <h1 className={s.title}>Welcome</h1>
         <div className={s.relative}>
-          <div onClick={() => setIsLogin(!isLogin)} className={`${s.switch} ${!isLogin && s.change}`}>{!isLogin ? "Login" : "Register"}</div>
+          <div
+            onClick={() => setIsLogin(!isLogin)}
+            className={`${s.switch} ${!isLogin && s.change}`}
+          >
+            {!isLogin ? "Login" : "Register"}
+          </div>
           <div className={`${s.auth} ${!isLogin && s.close}`}>
             <div className={s.name}>
               <div className={s.name__title}>Email</div>
@@ -84,7 +98,10 @@ export default function Auth() {
                 className={s.input}
                 value={profile.email}
                 onChange={(e) =>
-                  setProfile({ email: e.target.value, password: profile.password })
+                  setProfile({
+                    email: e.target.value,
+                    password: profile.password,
+                  })
                 }
               />
             </div>
@@ -106,7 +123,10 @@ export default function Auth() {
                 className={s.input}
                 value={profile.email}
                 onChange={(e) =>
-                  setProfile({ email: e.target.value, password: profile.password })
+                  setProfile({
+                    email: e.target.value,
+                    password: profile.password,
+                  })
                 }
               />
             </div>
@@ -123,7 +143,9 @@ export default function Auth() {
           </div>
         </div>
 
-        <Button onClick={isLogin ? () => signUp() : () => register()} >{isLogin ? "Login" : "Register"}</Button>
+        <Button onClick={isLogin ? () => signUp() : () => register()}>
+          {isLogin ? "Login" : "Register"}
+        </Button>
       </div>
       <Loading loading={loading} />
     </>

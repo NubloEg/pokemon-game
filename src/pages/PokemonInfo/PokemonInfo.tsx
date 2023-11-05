@@ -15,6 +15,15 @@ import icon from "../../assets/icons/Types/typesIcon";
 export default function PokemonInfo() {
   const [nowPokemon, setNowPokemon] = useState<Pokemon | undefined>();
   const [about, setAbout] = useState<Pokedex | undefined>(undefined);
+  const [evolution, setEvolution] = useState<{
+    first_evolv: string;
+    seconde_evolve: string;
+    three_evolve: string;
+  }>({
+    first_evolv: "",
+    seconde_evolve: "",
+    three_evolve: "",
+  });
   const [pokemonInfoState, setPokemonInfoState] = useState<string>("about");
 
   let currentPokemonId = useSelector(selectCurrentPokemon);
@@ -24,19 +33,18 @@ export default function PokemonInfo() {
     currentPokemonId = parseInt(ssesionId, 10);
   }
 
-  const getInfoPokemon = (id: number | undefined) => {
+  const getInfoPokemon = (id?: number) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setNowPokemon(data);
-        console.log(data);
       })
       .catch((e) => {
         alert("Покемон не найден");
       });
   };
 
-  const getAboutPokemon = (id: number | undefined) => {
+  const getAboutPokemon = (id?: number) => {
     fetch(`https://pokeapi.co/api/v2/characteristic/${id}`)
       .then((response) => response.json())
       .then((data) => {
@@ -45,86 +53,101 @@ export default function PokemonInfo() {
       .catch((e) => {});
   };
 
+  const getEvolutionPokemon = (id?: number) => {
+    fetch(` https://pokeapi.co/api/v2/evolution-chain/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.chain.species.url.at(-2));
+        setEvolution({
+          first_evolv: data.chain.species.url,
+          seconde_evolve: data.chain.evolves_to[0].species.url,
+          three_evolve: data.chain.evolves_to[0].evolves_to[0].species.url,
+        });
+      })
+      .catch((e) => {});
+  };
+
   useEffect(() => {
     getInfoPokemon(currentPokemonId);
     getAboutPokemon(currentPokemonId);
+    getEvolutionPokemon(currentPokemonId);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-const selectType = (type: string) => {
+  const selectType = (type: string) => {
     const typeSettings = { borderColor: "", src: "" };
     switch (type) {
       case "normal":
         typeSettings.borderColor = "gray";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "fire":
         typeSettings.borderColor = "red";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "water":
         typeSettings.borderColor = "blue";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "electric":
         typeSettings.borderColor = "yellow";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "grass":
         typeSettings.borderColor = "green";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "ice":
         typeSettings.borderColor = "#72e4e8";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "fighting":
         typeSettings.borderColor = "red";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "poison":
         typeSettings.borderColor = "purple";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "ground":
         typeSettings.borderColor = "#d68911";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "flying":
         typeSettings.borderColor = "#ddf5f6";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "psychic":
         typeSettings.borderColor = "purple";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "bug":
         typeSettings.borderColor = "green";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "rock":
         typeSettings.borderColor = "red";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "ghost":
         typeSettings.borderColor = "#cfc5f1";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "dragon":
         typeSettings.borderColor = "yellow";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "dark":
         typeSettings.borderColor = "black";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "steel":
         typeSettings.borderColor = "#d7d7d7";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
       case "fairy":
         typeSettings.borderColor = "#dc01fc";
-        typeSettings.src = icon[type]
+        typeSettings.src = icon[type];
         break;
     }
     return typeSettings;
@@ -137,7 +160,16 @@ const selectType = (type: string) => {
       ) : (
         <>
           <div className={s.card}>
-            <div className={s.img} style={{backgroundColor:selectType(nowPokemon.types !== undefined ? nowPokemon.types[0].type.name:"").borderColor}}>
+            <div
+              className={s.img}
+              style={{
+                backgroundColor: selectType(
+                  nowPokemon.types !== undefined
+                    ? nowPokemon.types[0].type.name
+                    : ""
+                ).borderColor,
+              }}
+            >
               <img
                 className={s.pokemonImg}
                 alt="pok"
@@ -147,7 +179,11 @@ const selectType = (type: string) => {
             <h2>{nowPokemon.name}</h2>
             <div className={s.types}>
               {nowPokemon.types?.map((type) => (
-                <TypePokemon key={type.type.name} selectType={selectType} typeName={type.type.name} />
+                <TypePokemon
+                  key={type.type.name}
+                  selectType={selectType}
+                  typeName={type.type.name}
+                />
               ))}
             </div>
             <div className={s.Tabs}>
@@ -199,8 +235,20 @@ const selectType = (type: string) => {
                     />
                   }
                 />
-                <Route path="/status" element={<Status stats={nowPokemon.stats} />} />
-                <Route path="/evolution" element={<Evolutions />} />
+                <Route
+                  path="/status"
+                  element={<Status stats={nowPokemon.stats} />}
+                />
+                <Route
+                  path="/evolution"
+                  element={
+                    <Evolutions
+                      first_evolv={evolution.first_evolv}
+                      seconde_evolve={evolution.seconde_evolve}
+                      three_evolve={evolution.three_evolve}
+                    />
+                  }
+                />
               </Routes>
             </div>
           </div>
