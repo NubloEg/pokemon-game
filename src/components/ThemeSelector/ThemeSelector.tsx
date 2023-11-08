@@ -14,7 +14,6 @@ export default function ThemeSelector({ theme }: Props) {
     theme === "light"
       ? dispatch(setTheme("dark"))
       : dispatch(setTheme("light"));
-    console.log(theme);
   };
   return (
     <label  className={s.change_theme}>

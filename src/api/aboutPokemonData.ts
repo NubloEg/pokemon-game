@@ -15,3 +15,4 @@ export interface HighestStat {
     name: string;
     url:  string;
 }
+

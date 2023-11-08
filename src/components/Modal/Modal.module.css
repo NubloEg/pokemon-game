@@ -11,9 +11,32 @@
     justify-content: center;
 }
 
+.modal.open{
+    scale: 0;
+}
+
 .content{
     width: 600px;
     height: 300px;
     background-color: white;
     border-radius: 15px;
+    padding: 25px;
+}
+
+.description{
+    height: 70%;
+}
+
+.price{
+    margin-bottom: 15px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.buttons button{
+    width: 100px;
 }
