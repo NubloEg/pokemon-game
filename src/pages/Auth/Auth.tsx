@@ -19,7 +19,6 @@ export default function Auth() {
   const signUp = () => {
     fetch(`https://pokemon-ozu77qv1l-nubloeg.vercel.app/api/auth/login`, {
       method: "post",
-      mode:"no-cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
