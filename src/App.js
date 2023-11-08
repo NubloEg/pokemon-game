@@ -8,7 +8,6 @@ import { darkTheme, lightTheme, GlobalStyles } from "./theme";
 import { ThemeProvider } from "styled-components";
 import { useSelector } from "react-redux";
 import { selectTheme } from './redux/profileSlice'
-import Error from "./components/Error/Error.tsx";
 
 function App() {
   const theme = useSelector(selectTheme);

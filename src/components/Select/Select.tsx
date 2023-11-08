@@ -3,14 +3,15 @@ import s from "./Select.module.css"
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options: string[];
+  setSearchType:React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function Select(props: Props) {
+export default function Select({options,setSearchType}: Props) {
   return (
     <span>
-      {props.options && (
-        <select className={s.select_css} name="pets" id="pet-select">
-          {props.options.map((option,ind) => (
+      {options && (
+        <select onChange={(e)=>setSearchType(e.target.value)} className={s.select_css} name="pets" id="pet-select">
+          {options.map((option,ind) => (
             <option key={ind} value={option}>{option}</option>
           ))}
         </select>

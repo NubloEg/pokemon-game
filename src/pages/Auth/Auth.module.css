@@ -59,6 +59,7 @@
     bottom:-30px;
     right: 0%;
     cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
     transition: all .5s;
     color: white;
@@ -86,6 +87,7 @@
     top: 0;
     position: absolute;
     display: flex;
+    visibility: hidden;
     flex-direction: column;
     gap: 34px;
     width: 100%;
@@ -94,5 +96,9 @@
 }
 
 .open{
+    visibility: visible;
+
+    display: flex;
+
     left: 0%;
 }
