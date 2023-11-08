@@ -17,8 +17,9 @@ export default function Auth() {
   });
 
   const signUp = () => {
-    fetch(`http://localhost:4444/api/auth/login`, {
+    fetch(`https://pokemon-ozu77qv1l-nubloeg.vercel.app/api/auth/login`, {
       method: "post",
+      mode:"no-cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -41,13 +42,11 @@ export default function Auth() {
       })
       .catch((e) => {
         alert(e);
-        navigate("/firstpokemon");
-
       });
   };
 
   const register = () => {
-    fetch(`https://pokemon-api-theta-inky.vercel.app/api/user`, {
+    fetch(`https://pokemon-ozu77qv1l-nubloeg.vercel.app/api/auth/register`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -69,14 +68,6 @@ export default function Auth() {
       .catch((e) => {
         alert(e);
       });
-  };
-
-  const onSumbit = () => {
-    if (isLogin) {
-      signUp();
-    } else {
-      register();
-    }
   };
 
   return (
