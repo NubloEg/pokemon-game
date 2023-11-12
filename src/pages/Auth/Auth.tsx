@@ -16,8 +16,9 @@ export default function Auth() {
     setTimeout(() => setLoading(false), 3000);
   });
 
+
   const signUp = () => {
-    fetch(`https://pokemon-ozu77qv1l-nubloeg.vercel.app/api/auth/login`, {
+    fetch(`https://pokemon-api-theta-inky.vercel.app/api/auth/login`, {
       method: "post",
       headers: {
         Accept: "application/json",
