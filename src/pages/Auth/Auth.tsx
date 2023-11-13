@@ -7,7 +7,12 @@ import Loading from "../../components/Loading/Loading";
 export default function Auth() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-  const [profile, setProfile] = useState<{ email: string; password: string }>({
+  const [profile, setProfile] = useState<{
+    fullName: string;
+    email: string;
+    password: string;
+  }>({
+    fullName: "Egor",
     email: "",
     password: "",
   });
@@ -16,10 +21,9 @@ export default function Auth() {
     setTimeout(() => setLoading(false), 3000);
   });
 
-
   const signUp = () => {
-    fetch(`https://pokemon-api-theta-inky.vercel.app/api/auth/login`, {
-      method: "post",
+    fetch(`https://pokemon-api-r32m.onrender.com/auth/login`, {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -30,12 +34,11 @@ export default function Auth() {
       }),
     })
       .then((response) => {
-        if (!response.ok) throw new Error(response.statusText);
         return response.json();
       })
       .then((data) => {
-        if (data.hasOwnProperty("error")) {
-          throw new Error(data.message[0]);
+        if (data.hasOwnProperty("message")) {
+          throw new Error(data.message)
         }
         sessionStorage.setItem("profile", JSON.stringify(data));
         navigate("/firstpokemon");
@@ -46,7 +49,7 @@ export default function Auth() {
   };
 
   const register = () => {
-    fetch(`https://pokemon-ozu77qv1l-nubloeg.vercel.app/api/auth/register`, {
+    fetch(`https://pokemon-api-r32m.onrender.com/auth/register`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -54,13 +57,18 @@ export default function Auth() {
       },
       body: JSON.stringify({
         email: profile.email,
+        fullName: profile.fullName,
         password: profile.password,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => 
+      response.json())
       .then((data) => {
-        if (data.hasOwnProperty("error")) {
-          throw new Error(data.message[0]);
+        if (data.hasOwnProperty("message")) {
+          throw new Error(data.message);
+        }
+        if (data.length && data[0].hasOwnProperty("msg")) {
+          throw new Error(data[0].msg);
         }
         sessionStorage.setItem("profile", JSON.stringify(data));
         navigate("/firstpokemon");
@@ -90,6 +98,7 @@ export default function Auth() {
                 value={profile.email}
                 onChange={(e) =>
                   setProfile({
+                    fullName: profile.fullName,
                     email: e.target.value,
                     password: profile.password,
                   })
@@ -102,12 +111,30 @@ export default function Auth() {
                 className={s.input}
                 value={profile.password}
                 onChange={(e) =>
-                  setProfile({ email: profile.email, password: e.target.value })
+                  setProfile({
+                    fullName: profile.fullName,
+                    email: profile.email,
+                    password: e.target.value,
+                  })
                 }
               />
             </div>
           </div>
           <div className={`${s.register} ${!isLogin && s.open}`}>
+            {/* <div className={s.name}>
+              <div className={s.name__title}>FullName</div>
+              <input
+                className={s.input}
+                value={profile.fullName}
+                onChange={(e) =>
+                  setProfile({
+                    fullName: e.target.value,
+                    email: profile.email,
+                    password: profile.password,
+                  })
+                }
+              />
+            </div> */}
             <div className={s.name}>
               <div className={s.name__title}>Email</div>
               <input
@@ -115,6 +142,7 @@ export default function Auth() {
                 value={profile.email}
                 onChange={(e) =>
                   setProfile({
+                    fullName: profile.fullName,
                     email: e.target.value,
                     password: profile.password,
                   })
@@ -127,7 +155,11 @@ export default function Auth() {
                 className={s.input}
                 value={profile.password}
                 onChange={(e) =>
-                  setProfile({ email: profile.email, password: e.target.value })
+                  setProfile({
+                    fullName: profile.fullName,
+                    email: profile.email,
+                    password: e.target.value,
+                  })
                 }
               />
             </div>
