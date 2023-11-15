@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className={s.home}>
       {
-        pokemons.map(item=><PokedexItem url={`https://pokeapi.co/api/v2/pokemon/${item.id}`} key={item.id} />)
+        pokemons.map(id=><PokedexItem url={`https://pokeapi.co/api/v2/pokemon/${id}`} key={id} />)
       }
     </div>
   )

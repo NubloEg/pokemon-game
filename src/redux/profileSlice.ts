@@ -3,7 +3,7 @@ import { RootState } from "./store";
 
 export interface profileState {
   email?: string;
-  password?: string;
+  fullName?: string;
   theme:string;
   currentPage?:string;
 }
@@ -16,9 +16,9 @@ export const profileSlice=createSlice({
     name:"profileSlice",
     initialState,
     reducers: {
-        setProfile: (state, action: PayloadAction<{email:string,password:string}>) => {
+        setProfile: (state, action: PayloadAction<{email:string,fullName:string}>) => {
          state.email=action.payload.email;
-         state.password=action.payload.password;
+         state.fullName=action.payload.fullName;
         },
         setTheme:(state,action:PayloadAction<string>)=>{
           state.theme=action.payload

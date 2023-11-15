@@ -26,11 +26,11 @@ export default function Pokedex() {
         });
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, searchValue,searchType]);
+  }, [page, searchValue, searchType]);
 
   useEffect(() => {
     if (searchType !== "All") {
-      setSearchType(searchType.toLowerCase())
+      setSearchType(searchType.toLowerCase());
       fetch(
         `https://pokeapi.co/api/v2/type/${searchType}?offset=${
           36 * page
@@ -40,7 +40,7 @@ export default function Pokedex() {
         .then((data) => {
           setItems([]);
           const items: Array<{ url: string }> = [];
-          for (let i = 36*page; i < 36 * (page + 1); i++) {
+          for (let i = 36 * page; i < 36 * (page + 1); i++) {
             const element = data.pokemon[i].pokemon;
             if (element === undefined) {
               break;
@@ -59,17 +59,15 @@ export default function Pokedex() {
     <div className={s.containerPokedex}>
       <div className={s.topMenu}>
         <div className={s.searchMenu}>
-          <input
+         {/*  <input
             type="search"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-          />
+          /> */}
           <Select
             setSearchType={setSearchType}
-            options={["All","Fire", "Grass", "Flying"]}
-          >
-            fire
-          </Select>
+            options={["All", "Fire", "Grass", "Flying"]}
+          />
         </div>
         <div className={s.changePage}>
           <Button

@@ -5,7 +5,7 @@ import { RootState } from "./store";
 
 export interface pokemonState {
   currentPokemonId?: number;
-  myPokemon: Pokemon[];
+  myPokemon: Array<string>;
   pokedex?: Pokemon[];
 }
 
@@ -18,8 +18,8 @@ export const pokemonSlice = createSlice({
     setCurrentPokemonId: (state, action: PayloadAction<number>) => {
       state.currentPokemonId = action.payload;
     },
-    addPokemon: (state, action: PayloadAction<Pokemon>) => {
-      state.myPokemon = [...state.myPokemon, action.payload];
+    addPokemon: (state, action: PayloadAction<Array<string>>) => {
+      state.myPokemon = [...action.payload];
     },
   },
 });

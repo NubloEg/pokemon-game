@@ -32,14 +32,14 @@ export default function About({
             <img src={weightIcon} alt="icon" />
             <span>Weight</span>
           </div>
-          <div className={s.value}>{weight} kg</div>
+          <div className={s.value}>{weight/10} kg</div>
         </div>
         <div className={s.abotInfo}>
           <div className={s.title}>
             <img src={heightIcon} alt="icon" />
             <span>Height</span>
           </div>
-          <div className={s.value}>0.{height} m</div>
+          <div className={s.value}>{height && height/10} m</div>
         </div>
         <div className={s.abotInfo}>
           <div className={s.title}>

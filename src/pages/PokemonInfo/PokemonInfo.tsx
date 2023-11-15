@@ -194,7 +194,6 @@ export default function PokemonInfo() {
                 to={`/pokemon/${nowPokemon.id}/about`}
                 onClick={() => setPokemonInfoState("about")}
               >
-                {" "}
                 About
               </Link>
               <Link
@@ -204,7 +203,6 @@ export default function PokemonInfo() {
                 to={`/pokemon/${nowPokemon.id}/status`}
                 onClick={() => setPokemonInfoState("status")}
               >
-                {" "}
                 Status
               </Link>
               <Link

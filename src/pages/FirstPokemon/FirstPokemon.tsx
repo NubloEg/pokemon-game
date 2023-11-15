@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addPokemon, setCurrentPokemonId } from "../../redux/pokemonSlice";
 import Loading from "../../components/Loading/Loading";
 import Money from "../../components/Money/Money";
+import { setErrors } from "../../redux/errorsSlice";
 
 export default function FirstPokemon() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
@@ -28,11 +29,38 @@ export default function FirstPokemon() {
       .then((data) => {
         setRandomPokemon(data);
         dispatch(setCurrentPokemonId(data.id));
-        dispatch(addPokemon(data));
+        addPokemonDB(`${data.id}`);
         setLoading(false);
       })
       .catch((e) => {
         alert("Покемон не найден");
+      });
+  };
+
+  const addPokemonDB = (id: string) => {
+    fetch(`https://pokemon-api-r32m.onrender.com/pokemon`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(sessionStorage.getItem("profile") || "").token
+        }`,
+      },
+      body: JSON.stringify({
+        pokemonId: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.hasOwnProperty("message")) {
+          throw new Error(data.message);
+        }
+
+        dispatch(addPokemon(data));
+      })
+      .catch((e) => {
+        dispatch(setErrors(e.message));
       });
   };
 

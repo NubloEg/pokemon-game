@@ -7,6 +7,7 @@ import Profile from "../../pages/Profile/Profile";
 import Home from "../../pages/Home/Home";
 import Shop from "../../pages/Shop/Shop";
 import Money from "../Money/Money";
+import ErrorToust from "../ErrorToust/ErrorToust";
 
 export default function Content() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Content() {
         </Routes>
         <Menu />
       </div>
+      <ErrorToust />
     </>
   );
 }
