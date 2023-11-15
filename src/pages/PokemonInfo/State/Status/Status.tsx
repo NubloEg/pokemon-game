@@ -16,7 +16,7 @@ export default function Status({ stats }: Props) {
       <div className={s.items}>
           {stats.map((stat) => (
             <div className={s.itemStat} key={stat.stat.name}>
-              <div className={s.title}>{stat.stat.name}</div>
+              <div className={s.title}>{stat.stat.name==="special-attack" ? "S.Attack":stat.stat.name==="special-defense" ? "S.Defense":stat.stat.name}</div>
               <div className={s.value}>{stat.base_stat}</div>
               <ProgressBar stat={stat.base_stat}/>
             </div>

@@ -5,6 +5,9 @@ import s from "./PokedexItem.module.css";
 import { useDispatch } from "react-redux";
 import { setCurrentPokemonId } from "../../redux/pokemonSlice";
 import ContentLoader from "react-content-loader";
+import TypePokemon from "../Type/Type.tsx";
+import { selectType } from "../../components/Type/Type.ts";
+
 
 interface Props {
   url: string;
@@ -18,12 +21,10 @@ export default function PokedexItem({ url }: Props) {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        
         setPokemon(data);
-       
       })
       .catch((e) => {
-       /*  alert("Покемон не найден"); */
+        /*  alert("Покемон не найден"); */
       });
   };
 
@@ -33,10 +34,10 @@ export default function PokedexItem({ url }: Props) {
     []
   );
 
-  const selectPokemon=(id:number)=>{
-    dispatch(setCurrentPokemonId(id))
-    sessionStorage.setItem("currentPokemon",id.toString());
-  }
+  const selectPokemon = (id: number) => {
+    dispatch(setCurrentPokemonId(id));
+    sessionStorage.setItem("currentPokemon", id.toString());
+  };
 
   return (
     <>
@@ -55,27 +56,31 @@ export default function PokedexItem({ url }: Props) {
             />
           </div>
           <div className={s.types}>
-            {pokemon.types?.map((type,i) => (
-              <span key={i}>{type.type.name}</span>
+            {pokemon.types?.map((type, i) => (
+              <TypePokemon
+                key={type.type.name}
+                selectType={selectType}
+                typeName={type.type.name}
+              />
             ))}
           </div>
         </Link>
       ) : (
         <ContentLoader
-        className={s.skeleton}
-        speed={2}
-        width={120}
-        height={160}
-        viewBox="0 0 120 160"
-        backgroundColor="#8c8c8c"
-        foregroundColor="#ecebeb"
-      >
-        <rect x="0" y="20" rx="100" ry="100" width="120" height="120" /> 
-        <rect x="0" y="5" rx="0" ry="0" width="120" height="10" /> 
-        <rect x="45" y="150" rx="0" ry="0" width="30" height="13" /> 
-        <rect x="0" y="150" rx="0" ry="0" width="30" height="13" /> 
-        <rect x="90" y="150" rx="0" ry="0" width="30" height="13" />
-      </ContentLoader>
+          className={s.skeleton}
+          speed={2}
+          width={120}
+          height={160}
+          viewBox="0 0 120 160"
+          backgroundColor="#8c8c8c"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="0" y="20" rx="100" ry="100" width="120" height="120" />
+          <rect x="0" y="5" rx="0" ry="0" width="120" height="10" />
+          <rect x="45" y="150" rx="0" ry="0" width="30" height="13" />
+          <rect x="0" y="150" rx="0" ry="0" width="30" height="13" />
+          <rect x="90" y="150" rx="0" ry="0" width="30" height="13" />
+        </ContentLoader>
       )}
     </>
   );

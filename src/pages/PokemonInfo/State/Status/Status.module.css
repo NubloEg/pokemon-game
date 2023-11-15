@@ -1,50 +1,59 @@
-.statsContainer{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.statsContainer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.items{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 30px;
-    max-width: 800px;
-    width: 100%;
+.items {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+  max-width: 800px;
+  width: 100%;
 }
 
-.itemStat{
-    display: flex;
-    gap: 40px;
+.itemStat {
+  display: flex;
+  gap: 40px;
 }
 
-.title{
-    width: 220px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: left;
+.title {
+  width: 220px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
 }
 
-.value{
-    font-weight: 700;
+.value {
+  font-weight: 700;
 }
 
-
-.progressBar{
-    position: relative;
-    width: 100%;
-    border: 1px solid black;
-    border-radius: 12px;
+.progressBar {
+  position: relative;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 12px;
 }
 
-.progressBarProc{
-    position: absolute;
-    background-color: #48D0B0;
-    height: 100%;
-    width: 0%;
-    border-radius: 12px;
-    transition: all 1s ;
+.progressBarProc {
+  position: absolute;
+  background-color: #48d0b0;
+  height: 100%;
+  width: 0%;
+  border-radius: 12px;
+  transition: all 1s;
+}
 
+@media (max-width: 500px) {
+  .itemStat {
+    gap: 20px;
+  }
+
+  .items {
+   margin: 10px 0px;
+   gap: 8px;
+  }
 }

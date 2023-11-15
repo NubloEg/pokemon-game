@@ -19,6 +19,6 @@ export const darkTheme = {
     transition: .3s ease;
    }
    h2{
-     color: ${props => props.theme.headingColor};
+     color: ${props => props.theme.textColor};
    }
   `

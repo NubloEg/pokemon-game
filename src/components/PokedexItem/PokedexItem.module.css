@@ -8,6 +8,15 @@
     flex:1 16%;
 }
 
+.card h3{
+    color: black;
+    font-weight: 700;
+
+}
+.card h3::first-letter{
+    text-transform: uppercase;
+}
+
 @media (max-width:700px) {
     .card{
         flex:1 25%;

@@ -3,13 +3,13 @@
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  background-color:  var(body);
+  background-color: var(body);
   flex-direction: column;
   padding: 50px 25px;
   height: 100vh;
 }
 
-.flex{
+.flex {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -17,7 +17,7 @@
   justify-content: space-between;
 }
 
-.money{
+.money {
   position: absolute;
   top: 5px;
   left: 15px;
@@ -26,6 +26,13 @@
   font-weight: 700;
 }
 
-.itemShop{
+.itemShop {
   cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .App {
+    padding: 50px 14px;
+    padding-bottom: 70px;
+  }
 }

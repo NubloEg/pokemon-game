@@ -32,7 +32,7 @@ export const profileSlice=createSlice({
 
 export const {setProfile,setCurrentPage,setTheme } = profileSlice.actions;
 
-export const selectProfile = (state: RootState) => state.pokemonsSlice.currentPokemonId;
+export const selectProfile = (state: RootState) => state.profileSlice;
 export const selectCurrentPage = (state:RootState) => state.profileSlice.currentPage;
 export const selectTheme = (state:RootState) => state.profileSlice.theme;
 

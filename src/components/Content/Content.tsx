@@ -12,7 +12,7 @@ import ErrorToust from "../ErrorToust/ErrorToust";
 export default function Content() {
   const navigate = useNavigate();
   useEffect(() => {
-    if (!sessionStorage.getItem("profile")) {
+    if (!sessionStorage.getItem("token")) {
       navigate("/auth");
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps

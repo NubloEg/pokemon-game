@@ -43,9 +43,7 @@ export default function FirstPokemon() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(sessionStorage.getItem("profile") || "").token
-        }`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         pokemonId: id,

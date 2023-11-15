@@ -18,5 +18,7 @@
 }
 
 @media (max-width: 600px) {
- 
+  .imgPokemon {
+    height: 60%;
+  }
 }
