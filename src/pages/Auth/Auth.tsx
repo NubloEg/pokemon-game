@@ -12,7 +12,7 @@ import { addPokemon } from "../../redux/pokemonSlice";
 export default function Auth() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [profile, setProfileLocal] = useState<{
     fullName: string;
     email: string;
@@ -23,15 +23,17 @@ export default function Auth() {
     password: "",
   });
   const [loading, setLoading] = useState(true);
+  const [isFetchData, setIsFetchData] = useState(false);
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);
-  },[]);
+  }, []);
 
   const login = () => {
+    setIsFetchData(true)
     fetch(`https://pokemon-api-r32m.onrender.com/auth/login`, {
       method: "post",
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -46,22 +48,25 @@ export default function Auth() {
         if (data.hasOwnProperty("message")) {
           throw new Error(data.message);
         }
-        dispatch(setProfile({email:data.email,fullName:data.fullName}))
-        dispatch(addPokemon(data.pokemons))
+        dispatch(setProfile({ email: data.email, fullName: data.fullName }));
+        dispatch(addPokemon(data.pokemons));
         sessionStorage.setItem("token", data.token);
         navigate("/firstpokemon");
       })
       .catch((e) => {
-        console.log(e.message)
+        console.log(e.message);
         dispatch(setErrors(e.message));
+      }).finally(()=>{
+        setIsFetchData(false)
       });
   };
 
   const register = () => {
+    setIsFetchData(true)
     fetch(`https://pokemon-api-r32m.onrender.com/auth/register`, {
       method: "post",
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -81,33 +86,34 @@ export default function Auth() {
           });
           return;
         }
-        dispatch(setProfile({email:data.email,fullName:data.fullName}))
+        dispatch(setProfile({ email: data.email, fullName: data.fullName }));
         sessionStorage.setItem("token", data.token);
         navigate("/firstpokemon");
       })
       .catch((e) => {
         dispatch(setErrors(e.message));
-
+      }).finally(()=>{
+        setIsFetchData(false)
       });
   };
 
-  const onClickEnter=(e:React.KeyboardEvent<HTMLInputElement>)=>{
-    if(e.code==="Enter"){
-      isLogin ? login() : register()
+  const onClickEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === "Enter") {
+      isLogin ? login() : register();
     }
-  }
+  };
 
   return (
     <>
       <div className={s.authMain}></div>
-      <div  className={s.form}>
+      <div className={s.form}>
         <div className={s.formTitle}>Welcome</div>
         <div className={s.auth}>
           <div className={`${s.input} ${isLogin ? s.none : s.field}`}>
             <div>Name</div>
             <input
               value={profile.fullName}
-              onKeyDown={(e)=>onClickEnter(e)}
+              onKeyDown={(e) => onClickEnter(e)}
               onChange={(e) =>
                 setProfileLocal({
                   fullName: e.target.value,
@@ -122,7 +128,7 @@ export default function Auth() {
             <div>Email</div>
             <input
               value={profile.email}
-              onKeyDown={(e)=>onClickEnter(e)}
+              onKeyDown={(e) => onClickEnter(e)}
               onChange={(e) =>
                 setProfileLocal({
                   fullName: profile.fullName,
@@ -137,7 +143,7 @@ export default function Auth() {
             <div>Password</div>
             <input
               value={profile.password}
-              onKeyDown={(e)=>onClickEnter(e)}
+              onKeyDown={(e) => onClickEnter(e)}
               onChange={(e) =>
                 setProfileLocal({
                   fullName: profile.fullName,
@@ -155,9 +161,13 @@ export default function Auth() {
               {!isLogin ? "Login" : "Register"}
             </span>
           </div>
+          <div style={{position:"relative"}}>
+          <Loading borderRadius="20px" loading={isFetchData} />
           <Button onClick={() => (isLogin ? login() : register())}>
             {isLogin ? "Login" : "Register"}
           </Button>
+          </div>
+        
         </div>
       </div>
       <Loading loading={loading} />
