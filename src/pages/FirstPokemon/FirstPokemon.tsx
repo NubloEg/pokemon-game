@@ -1,19 +1,26 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Pokemon } from "../../api/pokemonData";
 import logo from "../../assets/images/randomBox.svg";
 import Button from "../../components/Button/Button";
 import s from "./FirstPokemon.module.css";
 import { useDispatch } from "react-redux";
-import { addPokemon, setCurrentPokemonId } from "../../redux/pokemonSlice";
+import {
+  addPokemon,
+  selectMyPokemons,
+  setCurrentPokemonId,
+} from "../../redux/pokemonSlice";
 import Loading from "../../components/Loading/Loading";
 import Money from "../../components/Money/Money";
 import { setErrors } from "../../redux/errorsSlice";
+import { useSelector } from "react-redux";
 
 export default function FirstPokemon() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
     undefined
   );
+  const pokemons = useSelector(selectMyPokemons);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   function getRandomArbitrary(min: number, max: number): number {
     let result = Math.random() * (max - min) + min;
@@ -21,6 +28,12 @@ export default function FirstPokemon() {
   }
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (pokemons.length) {
+      navigate("/home");
+    }
+  }, []);
 
   const randomPokemonFun = (id: number) => {
     setLoading(true);
