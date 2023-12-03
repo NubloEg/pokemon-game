@@ -1,20 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Pokemon } from "../../api/pokemonData";
 import logo from "../../assets/images/randomBox.svg";
 import Button from "../../components/Button/Button";
 import s from "./FirstPokemon.module.css";
 import { useDispatch } from "react-redux";
-import { addPokemon, setCurrentPokemonId } from "../../redux/pokemonSlice";
+import {
+  addPokemon,
+  setBoss,
+  setCurrentPokemonId,
+} from "../../redux/pokemonSlice";
 import Loading from "../../components/Loading/Loading";
 import Money from "../../components/Money/Money";
 import { setErrors } from "../../redux/errorsSlice";
-import { setPokemonDay } from "../../redux/profileSlice";
+import {
+  setFightDay,
+  setPokemonDay,
+  setProfile,
+} from "../../redux/profileSlice";
 
 export default function FirstPokemon() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
     undefined
   );
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   function getRandomArbitrary(min: number, max: number): number {
     let result = Math.random() * (max - min) + min;
@@ -31,7 +40,7 @@ export default function FirstPokemon() {
         setRandomPokemon(data);
         dispatch(setCurrentPokemonId(data.id));
         addPokemonDB(`${data.id}`);
-        changeStatusFirstPokemon()
+        changeStatusFirstPokemon();
         setLoading(false);
       })
       .catch((e) => {
@@ -58,7 +67,6 @@ export default function FirstPokemon() {
         }
 
         dispatch(addPokemon(data));
-
       })
       .catch((e) => {
         dispatch(setErrors(e.message));
@@ -84,7 +92,45 @@ export default function FirstPokemon() {
         }
 
         dispatch(setPokemonDay(false));
+      })
+      .catch((e) => {
+        dispatch(setErrors(e.message));
+      });
+  };
 
+  useEffect(() => {
+    getMe();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getMe = () => {
+    fetch(`https://pokemon-api-r32m.onrender.com/auth/me`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.hasOwnProperty("message")) {
+          throw new Error(data.message);
+        }
+        dispatch(
+          setProfile({
+            email: data.email,
+            fullName: data.fullName,
+            money: data.money,
+          })
+        );
+        dispatch(addPokemon(data.pokemons));
+        dispatch(setBoss(data.boss));
+        dispatch(setPokemonDay(data.getFirstPokemon));
+        if (!data.getFirstPokemon) {
+          navigate("/home");
+        }
+        dispatch(setFightDay(data.fightToDay));
       })
       .catch((e) => {
         dispatch(setErrors(e.message));
