@@ -14,3 +14,4 @@ export const getPokemonName = (name: string) => {
 
   return result;
 };
+

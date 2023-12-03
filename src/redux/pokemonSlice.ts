@@ -7,9 +7,15 @@ export interface pokemonState {
   currentPokemonId?: number;
   myPokemon: Array<string>;
   pokedex?: Pokemon[];
+  bossPokemon: Array<{
+    name: string;
+    url: string;
+    hpNow: number;
+    hpAll: number;
+  }>;
 }
 
-const initialState: pokemonState = {myPokemon: []};
+const initialState: pokemonState = { myPokemon: [], bossPokemon: [] };
 
 export const pokemonSlice = createSlice({
   name: "pokemons",
@@ -21,12 +27,24 @@ export const pokemonSlice = createSlice({
     addPokemon: (state, action: PayloadAction<Array<string>>) => {
       state.myPokemon = [...action.payload];
     },
+    setBoss: (state, action: PayloadAction<Array<{
+      name: string;
+      url: string;
+      hpNow: number;
+      hpAll: number;
+    }>>) => {
+      state.bossPokemon = [...action.payload];
+    },
   },
 });
 
-export const {setCurrentPokemonId,addPokemon } = pokemonSlice.actions;
+export const { setCurrentPokemonId, addPokemon ,setBoss} = pokemonSlice.actions;
 
-export const selectCurrentPokemon = (state: RootState) => state.pokemonsSlice.currentPokemonId;
-export const selectMyPokemons = (state: RootState) => state.pokemonsSlice.myPokemon;
+export const selectCurrentPokemon = (state: RootState) =>
+  state.pokemonsSlice.currentPokemonId;
+export const selectMyPokemons = (state: RootState) =>
+  state.pokemonsSlice.myPokemon;
+  export const selectBoss = (state: RootState) =>
+  state.pokemonsSlice.bossPokemon;
 
 export default pokemonSlice.reducer;

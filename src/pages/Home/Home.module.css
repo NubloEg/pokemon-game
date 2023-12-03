@@ -2,8 +2,51 @@
     height: calc(100% - 90px);
     display: flex;
     width: 100%;
-    flex-wrap: wrap;
+    flex-direction: column;
     row-gap: 15px;
-    overflow-y: auto;
     
+}
+
+.home_pokemons{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    row-gap: 20px;
+
+}
+
+.boss_img{
+    height: 220px;
+    border-radius: 20px;
+    width: 155px;
+    
+}
+
+.allBoss{
+    display: flex;
+    gap:50px
+}
+
+.boss{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+
+}
+
+.boss_title{
+    font-weight: 700; 
+    font-size: 26px;
+    color: rgb(193, 0, 0);
+    font-family: 'Courier New', Courier, monospace;
+ }
+
+@media (max-height:700px) {
+    .boss_img{
+        height: 130px;
+        width: 130px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
 }

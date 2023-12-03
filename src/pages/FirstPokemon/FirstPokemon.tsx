@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Pokemon } from "../../api/pokemonData";
 import logo from "../../assets/images/randomBox.svg";
 import Button from "../../components/Button/Button";
 import s from "./FirstPokemon.module.css";
 import { useDispatch } from "react-redux";
-import {
-  addPokemon,
-  selectMyPokemons,
-  setCurrentPokemonId,
-} from "../../redux/pokemonSlice";
+import { addPokemon, setCurrentPokemonId } from "../../redux/pokemonSlice";
 import Loading from "../../components/Loading/Loading";
 import Money from "../../components/Money/Money";
 import { setErrors } from "../../redux/errorsSlice";
-import { useSelector } from "react-redux";
+import { setPokemonDay } from "../../redux/profileSlice";
 
 export default function FirstPokemon() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>(
     undefined
   );
-  const pokemons = useSelector(selectMyPokemons);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   function getRandomArbitrary(min: number, max: number): number {
     let result = Math.random() * (max - min) + min;
@@ -28,12 +22,6 @@ export default function FirstPokemon() {
   }
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (pokemons.length) {
-      navigate("/home");
-    }
-  }, []);
 
   const randomPokemonFun = (id: number) => {
     setLoading(true);
@@ -43,6 +31,7 @@ export default function FirstPokemon() {
         setRandomPokemon(data);
         dispatch(setCurrentPokemonId(data.id));
         addPokemonDB(`${data.id}`);
+        changeStatusFirstPokemon()
         setLoading(false);
       })
       .catch((e) => {
@@ -69,6 +58,33 @@ export default function FirstPokemon() {
         }
 
         dispatch(addPokemon(data));
+
+      })
+      .catch((e) => {
+        dispatch(setErrors(e.message));
+      });
+  };
+
+  const changeStatusFirstPokemon = () => {
+    fetch(`https://pokemon-api-r32m.onrender.com/setAddPokemon`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        status: false,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.hasOwnProperty("message")) {
+          throw new Error(data.message);
+        }
+
+        dispatch(setPokemonDay(false));
+
       })
       .catch((e) => {
         dispatch(setErrors(e.message));
